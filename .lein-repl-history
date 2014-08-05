@@ -1,0 +1,21 @@
+(use 'blog-clj.models.db)
+(create-blog-table)
+(use 'blog-clj.models.db)
+(ns-unmap 'user 'save-post)
+(use 'blog-clj.models.db)
+(ns-unmap 'user 'save-post)
+(use 'blog-clj.models.db)
+(ns-unmap 'user 'save-post)
+(use 'blog-clj.models.db)
+(ns-unmap 'user 'save-post)
+(use 'blog-clj.models.db)
+exit
+(use 'blog-clj.models.db)
+(save-post "My First Post" "This is indeed my first post" "hello")
+(read-posts)
+(for [{:keys [name post tags timestamp]} (read-posts)]
+(prn "Name=" name))
+(read-posts)
+(save-post "My Second Post" "This is indeed my second post" "hello2")
+(read-posts)
+exit

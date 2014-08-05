@@ -1,0 +1,55 @@
+(ns blog-clj.routes.home
+  (:require [compojure.core :refer :all]
+            [blog-clj.views.layout :as layout]
+            [hiccup.form :refer :all]))
+
+(defn header []
+  (layout/common
+   [:p "Welcome authorization here | New Post"]))
+
+(defn show-posts [name post tags]
+    (layout/common
+      [:h2 "Name" name]
+      [:p "Posted " (new java.util.Date) " by mkm"]
+      [:p "Tags:" tags]))
+
+(defn create-post [& [name post tags]]
+  (layout/common
+   (header)
+   (form-to [:post "/"]
+    [:p [:b "Title:"]]
+    (text-field "name" name)
+    [:p [:b "Blog Post"]]
+    (text-area {:rows 10 :cols 40} "post" post)
+    [:br]
+    [:p [:b "Tags"]]
+    [:p "Comma separated, please"]
+    (text-field "tags" tags)
+    [:br]
+    (submit-button "Submit"))))
+
+
+(defn home [& [name post tags errormessage]]
+  (layout/common
+   (header)
+   [:p errormessage]
+   [:h1 "My Blog"]
+   (show-posts name post tags)
+   [:hr]
+   ))
+
+(defn save-post [name post tags]
+  (cond
+   (empty? name)
+   (home name post tags "Some dummy forgot to leave a name")
+   (empty? post)
+   (home name post tags "Don'y you have something to say?")   
+   :else
+   (do
+     (println name post tags)
+     (home name post tags))))
+
+(defroutes home-routes
+  (GET "/" [] (home))
+  (GET "/newpost" [] (create-post))
+  (POST "/" [name post tags] (save-post name post tags)))
