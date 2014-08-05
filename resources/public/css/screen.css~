@@ -1,0 +1,14 @@
+body {
+    color: #555;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+<<<<<<< HEAD
+    font-size: 13px;
+=======
+    font-size: 13px;        
+>>>>>>> 53758eaa486df8f6b59b357d366c8a185f6ac35d
+}
+
+h1 {
+    text-align: center;
+}
+
